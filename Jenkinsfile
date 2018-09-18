@@ -5,6 +5,7 @@ node {
     
     stage('Checkout') {
         echo 'Bajando cambios de repositorio ...'
+        echo currentBuild.currentResult
         checkout scm
     }
     
