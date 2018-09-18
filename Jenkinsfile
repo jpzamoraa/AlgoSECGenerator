@@ -16,8 +16,8 @@ node {
     stage('Cobertura') {
         echo 'Cobertura Jacoco...'
         try {
-		     //executeMavenGoal('clean org.jacoco:jacoco-maven-plugin:prepare-agent install -DargLine=-Xmx4096m -Dcobertura.report.format=xml -DforkCount=16 -DreuseForks=true  -Dmaven.test.failure.ignore=false', 
-		       //               'pom.xml', '-Xmx1024m') 
+		     executeMavenGoal('clean org.jacoco:jacoco-maven-plugin:prepare-agent install -DargLine=-Xmx4096m -Dcobertura.report.format=xml -DforkCount=16 -DreuseForks=true  -Dmaven.test.failure.ignore=false', 
+		                    'pom.xml', '-Xmx1024m') 
             //jacoco execPattern: '**/target/**.exec'
             jacoco( 
 			      execPattern: 'target/**.exec',
