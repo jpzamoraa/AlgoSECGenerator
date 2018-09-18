@@ -35,9 +35,9 @@ node {
     }
     stage('Sonar') {
         echo 'Sonar ...'
-        //withSonarQubeEnv('Development') {
-		//    executeMavenGoal('sonar:sonar', 'pom.xml', '-Xmx1024m') 
-	    //    }
+        withSonarQubeEnv('Development') {
+		    executeMavenGoal('sonar:sonar', 'pom.xml', '-Xmx1024m') 
+	        }
 
     }
     stage ('Install') {
