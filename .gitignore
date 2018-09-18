@@ -1,2 +1,4 @@
 
 target/classes/META-INF/maven/net.bac.algosec/AlgoSECGenerator/pom.properties
+target/classes/META-INF/maven/net.bac.algosec/AlgoSECGenerator/pom.properties
+target/test-classes/net/bac/algosec/AlgoSECGenerator/helper/AlgoSECHelperTest.class
