@@ -24,6 +24,12 @@
       <version>4.12</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+			<groupId>org.jacoco</groupId>
+			<artifactId>org.jacoco.agent</artifactId>
+			<version>${jacoco.version}</version>
+			<classifier>runtime</classifier>
+		</dependency>
   </dependencies>
   <build>
   	<finalName>${project.artifactId}-${project.version}</finalName>
