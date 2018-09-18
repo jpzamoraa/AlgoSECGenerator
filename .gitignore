@@ -23,3 +23,5 @@ target/test-classes/net/bac/algosec/AlgoSECGenerator/AppTest.class
 *.class
 target/classes/net/bac/algosec/AlgoSECGenerator/ui/AlgoSECGenerator.class
 target/classes/net/bac/algosec/AlgoSECGenerator/helper/AlgoSECHelper.class
+target/classes/META-INF/maven/net.bac.algosec/AlgoSECGenerator/pom.properties
+target/classes/META-INF/maven/net.bac.algosec/AlgoSECGenerator/pom.xml
