@@ -20,8 +20,8 @@ node {
 		       //               'pom.xml', '-Xmx1024m') 
             //jacoco execPattern: '**/target/**.exec'
             jacoco( 
-			      execPattern: '**/target/**.exec',
-			      classPattern: '**/target/classes',
+			      execPattern: 'target/**.exec',
+			      classPattern: 'target/classes',
 			      sourcePattern: 'src/main/java',
 			      exclusionPattern: 'src/test*'
 			)
@@ -30,7 +30,7 @@ node {
 		    throw e
 		}
 		finally{
-		    //junit 'target/surefire-reports/*.xml'
+		    junit 'target/surefire-reports/*.xml'
 		}
     }
     stage('Sonar') {
