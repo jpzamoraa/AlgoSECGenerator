@@ -80,7 +80,7 @@ def executeMavenGoal(pGoalsAndOptions, pPomFilePath, pMavenOpts){
     executeMavenGoal (mavenToolDefault, javaToolDefault, mavenSettingsDefault, mavenRepositoryDefault, pGoalsAndOptions, pPomFilePath, pMavenOpts)
 }
 
-def call(String buildResult) {
+def slackNotifier(String buildResult) {
   if ( buildResult == "SUCCESS" ) {
     slackSend color: "good", message: "Job: ${env.JOB_NAME} with buildnumber ${env.BUILD_NUMBER} was successful"
   }
