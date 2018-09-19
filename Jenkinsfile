@@ -11,15 +11,12 @@ node {
     
     stage('Compile') {
         echo 'Compilando ...'
-        try {
-	       executeMavenGoal('clean compile', 
-					 'pom.xml', '-Xmx1024m')
-			echo currentBuild.currentResult
-			slackNotifier(currentBuild.currentResult)
-		}catch(e){
-			slackNotifier(currentBuild.currentResult)
-		    throw e
-		}
+        
+       executeMavenGoal('clean compile', 
+				 'pom.xml', '-Xmx1024m')
+		echo currentBuild.currentResult
+		slackNotifier(currentBuild.currentResult)
+		
     }
     stage('Cobertura') {
         echo 'Cobertura Jacoco...'
@@ -53,7 +50,7 @@ node {
         //sh 'mvn install -Dmaven.test.skip=true'
          executeMavenGoal('install -Dmaven.test.skip=true', 
 				 'pom.xml', '-Xmx1024m')
-		slackNotifier(currentBuild.currentResult)
+		//slackNotifier(currentBuild.currentResult)
     }
 }
 def executeMavenGoal (pMavenToolName, pJdkToolName, pMavenSettingsId, pMavenRepositoryPath, pGoalsAndOptions, pPomFilePath, pMavenOpts) {
@@ -73,7 +70,10 @@ def executeMavenGoal (pMavenToolName, pJdkToolName, pMavenSettingsId, pMavenRepo
          }
          
          sh 'echo ' + mavenCommand + " " + pGoalsAndOptions
-         sh mavenCommand + " " + pGoalsAndOptions
+         def exitCode = sh mavenCommand + " " + pGoalsAndOptions
+         echo exitCode
+         slackNotifier(currentBuild.currentResult)
+         
     }
 }
 
