@@ -82,15 +82,15 @@ def executeMavenGoal(pGoalsAndOptions, pPomFilePath, pMavenOpts){
 
 def slackNotifier(String buildResult) {
   if ( buildResult == "SUCCESS" ) {
-    slackSend color: "good", message: "Job: ${env.JOB_NAME} with buildnumber ${env.BUILD_NUMBER} was successful"
+    slackSend color: "good", message: "${env.JOB_NAME}:${STAGE_NAME} with buildnumber ${env.BUILD_NUMBER} was SUCCESSFUL"
   }
   else if( buildResult == "FAILURE" ) { 
-    slackSend color: "danger", message: "Job: ${env.JOB_NAME} with buildnumber ${env.BUILD_NUMBER} was failed"
+    slackSend color: "danger", message: "${env.JOB_NAME}:${STAGE_NAME} with buildnumber ${env.BUILD_NUMBER} was FAILED"
   }
   else if( buildResult == "UNSTABLE" ) { 
-    slackSend color: "warning", message: "Job: ${env.JOB_NAME} with buildnumber ${env.BUILD_NUMBER} was unstable"
+    slackSend color: "warning", message: "${env.JOB_NAME}:${STAGE_NAME} with buildnumber ${env.BUILD_NUMBER} was UNSTABLE"
   }
   else {
-    slackSend color: "danger", message: "Job: ${env.JOB_NAME} with buildnumber ${env.BUILD_NUMBER} its resulat was unclear"	
+    slackSend color: "danger", message: "${env.JOB_NAME}:${STAGE_NAME} with buildnumber ${env.BUILD_NUMBER} its resulat was UNCLEAR"	
   }
 }
