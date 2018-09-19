@@ -70,8 +70,14 @@ def executeMavenGoal (pMavenToolName, pJdkToolName, pMavenSettingsId, pMavenRepo
          }
          
          sh 'echo ' + mavenCommand + " " + pGoalsAndOptions
-         sh mavenCommand + " " + pGoalsAndOptions
-         echo currentBuild.currentResult
+         try {
+         	sh mavenCommand + " " + pGoalsAndOptions
+         } catch (Exception err) {
+            echo 'Maven clean install failed'
+            currentBuild.result = 'FAILURE'
+            slackNotifier(currentBuild.currentResult)
+         }
+}
          //slackNotifier(currentBuild.currentResult)
          
     }
