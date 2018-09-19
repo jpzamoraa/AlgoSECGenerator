@@ -72,7 +72,7 @@ def executeMavenGoal (pMavenToolName, pJdkToolName, pMavenSettingsId, pMavenRepo
          sh 'echo ' + mavenCommand + " " + pGoalsAndOptions
          def exitCode = sh mavenCommand + " " + pGoalsAndOptions
          echo exitCode
-         slackNotifier(currentBuild.currentResult)
+         //slackNotifier(currentBuild.currentResult)
          
     }
 }
