@@ -77,7 +77,6 @@ def executeMavenGoal (pMavenToolName, pJdkToolName, pMavenSettingsId, pMavenRepo
             currentBuild.result = 'FAILURE'
             slackNotifier(currentBuild.currentResult)
          }
-}
          //slackNotifier(currentBuild.currentResult)
          
     }
