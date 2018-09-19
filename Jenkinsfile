@@ -47,12 +47,13 @@ node {
     }
     stage ('Install') {
         echo 'Build ...'
-        //sh 'mvn install -Dmaven.test.skip=true'
          executeMavenGoal('install -Dmaven.test.skip=true', 
 				 'pom.xml', '-Xmx1024m')
-		//slackNotifier(currentBuild.currentResult)
+		
     }
 }
+
+/* Ejecuta comandos de maven */
 def executeMavenGoal (pMavenToolName, pJdkToolName, pMavenSettingsId, pMavenRepositoryPath, pGoalsAndOptions, pPomFilePath, pMavenOpts) {
     withMaven(
          maven: pMavenToolName,
@@ -83,6 +84,7 @@ def executeMavenGoal (pMavenToolName, pJdkToolName, pMavenSettingsId, pMavenRepo
     }
 }
 
+/* Ejecuta comandos de maven */
 def executeMavenGoal(pGoalsAndOptions, pPomFilePath, pMavenOpts){
     def mavenToolDefault = 'Maven_Local'
     def javaToolDefault = 'IBM SDK 8.0'
@@ -91,6 +93,7 @@ def executeMavenGoal(pGoalsAndOptions, pPomFilePath, pMavenOpts){
     executeMavenGoal (mavenToolDefault, javaToolDefault, mavenSettingsDefault, mavenRepositoryDefault, pGoalsAndOptions, pPomFilePath, pMavenOpts)
 }
 
+/* Notificaciones de Slack */
 def slackNotifier(String buildResult) {
   if ( buildResult == "SUCCESS" ) {
     slackSend color: "good", message: "${env.JOB_NAME}:${STAGE_NAME} with buildnumber ${env.BUILD_NUMBER} was SUCCESSFUL"
