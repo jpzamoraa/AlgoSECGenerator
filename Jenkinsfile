@@ -17,10 +17,8 @@ node {
 			echo currentBuild.currentResult
 			slackNotifier(currentBuild.currentResult)
 		}catch(e){
-		    throw e
-		}
-		finally{
 			slackNotifier(currentBuild.currentResult)
+		    throw e
 		}
     }
     stage('Cobertura') {
