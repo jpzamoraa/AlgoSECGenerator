@@ -23,6 +23,7 @@ public class AlgoSECGenerator {
 		Set<String> set = AlgoSECHelper.generateAlgoSECRequest(sources, destinations, ports, ACTION);
 		for (String line : set) {
 			System.out.println(line);
+			s:
 		}
 	}
 

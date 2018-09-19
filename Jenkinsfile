@@ -85,7 +85,7 @@ def slackNotifier(String buildResult) {
     slackSend color: "good", message: "${env.JOB_NAME}:${STAGE_NAME} with buildnumber ${env.BUILD_NUMBER} was SUCCESSFUL"
   }
   else if( buildResult == "FAILURE" ) { 
-    slackSend color: "danger", message: "${env.JOB_NAME}:${STAGE_NAME} with buildnumber ${env.BUILD_NUMBER} was FAILED"
+    slackSend color: "danger", message: "${env.JOB_NAME}:${STAGE_NAME} with buildnumber ${env.BUILD_NUMBER} was FAILED: ${env.BUILD_URL}"
   }
   else if( buildResult == "UNSTABLE" ) { 
     slackSend color: "warning", message: "${env.JOB_NAME}:${STAGE_NAME} with buildnumber ${env.BUILD_NUMBER} was UNSTABLE"

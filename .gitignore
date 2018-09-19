@@ -64,3 +64,4 @@ target/site/jacoco/net.bac.algosec.AlgoSECGenerator.ui/AlgoSECGenerator.html
 target/site/jacoco/net.bac.algosec.AlgoSECGenerator.ui/AlgoSECGenerator.java.html
 target/site/jacoco/net.bac.algosec.AlgoSECGenerator.ui/index.html
 target/site/jacoco/net.bac.algosec.AlgoSECGenerator.ui/index.source.html
+target/classes/net/bac/algosec/AlgoSECGenerator/ui/AlgoSECGenerator.class
