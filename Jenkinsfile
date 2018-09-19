@@ -11,10 +11,17 @@ node {
     
     stage('Compile') {
         echo 'Compilando ...'
-       executeMavenGoal('clean compile', 
-				 'pom.xml', '-Xmx1024m')
-		echo currentBuild.currentResult
-		slackNotifier(currentBuild.currentResult)
+        try {
+	       executeMavenGoal('clean compile', 
+					 'pom.xml', '-Xmx1024m')
+			echo currentBuild.currentResult
+			slackNotifier(currentBuild.currentResult)
+		}catch(e){
+		    throw e
+		}
+		finally{
+			slackNotifier(currentBuild.currentResult)
+		}
     }
     stage('Cobertura') {
         echo 'Cobertura Jacoco...'
