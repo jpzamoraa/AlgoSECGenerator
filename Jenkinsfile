@@ -5,14 +5,16 @@ node {
     
     stage('Checkout') {
         echo 'Bajando cambios de repositorio ...'
-        echo currentBuild.currentResult
         checkout scm
+        echo currentBuild.currentResult
     }
     
     stage('Compile') {
         echo 'Compilando ...'
        executeMavenGoal('clean compile', 
 				 'pom.xml', '-Xmx1024m')
+		echo currentBuild.currentResult
+		slackNotifier(currentBuild.currentResult)
     }
     stage('Cobertura') {
         echo 'Cobertura Jacoco...'
@@ -46,6 +48,7 @@ node {
         //sh 'mvn install -Dmaven.test.skip=true'
          executeMavenGoal('install -Dmaven.test.skip=true', 
 				 'pom.xml', '-Xmx1024m')
+		slackNotifier(currentBuild.currentResult)
     }
 }
 def executeMavenGoal (pMavenToolName, pJdkToolName, pMavenSettingsId, pMavenRepositoryPath, pGoalsAndOptions, pPomFilePath, pMavenOpts) {
@@ -75,4 +78,19 @@ def executeMavenGoal(pGoalsAndOptions, pPomFilePath, pMavenOpts){
     def mavenSettingsDefault = 'org.jenkinsci.plugins.configfiles.maven.MavenSettingsConfig1411853262833'
     def mavenRepositoryDefault = '.m2'
     executeMavenGoal (mavenToolDefault, javaToolDefault, mavenSettingsDefault, mavenRepositoryDefault, pGoalsAndOptions, pPomFilePath, pMavenOpts)
+}
+
+def call(String buildResult) {
+  if ( buildResult == "SUCCESS" ) {
+    slackSend color: "good", message: "Job: ${env.JOB_NAME} with buildnumber ${env.BUILD_NUMBER} was successful"
+  }
+  else if( buildResult == "FAILURE" ) { 
+    slackSend color: "danger", message: "Job: ${env.JOB_NAME} with buildnumber ${env.BUILD_NUMBER} was failed"
+  }
+  else if( buildResult == "UNSTABLE" ) { 
+    slackSend color: "warning", message: "Job: ${env.JOB_NAME} with buildnumber ${env.BUILD_NUMBER} was unstable"
+  }
+  else {
+    slackSend color: "danger", message: "Job: ${env.JOB_NAME} with buildnumber ${env.BUILD_NUMBER} its resulat was unclear"	
+  }
 }
