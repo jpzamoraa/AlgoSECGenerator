@@ -76,6 +76,7 @@ def executeMavenGoal (pMavenToolName, pJdkToolName, pMavenSettingsId, pMavenRepo
             echo 'Maven clean install failed'
             currentBuild.result = 'FAILURE'
             slackNotifier(currentBuild.currentResult)
+            throw err
          }
          //slackNotifier(currentBuild.currentResult)
          
