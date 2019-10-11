@@ -10,45 +10,16 @@ node {
     }
     
     stage('Compile') {
-        echo 'Compilando ...'
+       echo 'Compilando ...'
         
-       executeMavenGoal('clean compile', 
-				 'pom.xml', '-Xmx1024m')
-		echo currentBuild.currentResult
-		slackNotifier(currentBuild.currentResult)
+       executeMavenGoal('clean compile','pom.xml', '-Xmx1024m')
+	   echo currentBuild.currentResult
 		
     }
-    stage('Cobertura') {
-        echo 'Cobertura Jacoco...'
-        try {
-		     executeMavenGoal('clean org.jacoco:jacoco-maven-plugin:prepare-agent install -DargLine=-Xmx4096m -Dcobertura.report.format=xml -DforkCount=16 -DreuseForks=true  -Dmaven.test.failure.ignore=false', 
-		                    'pom.xml', '-Xmx1024m') 
-            //jacoco execPattern: '**/target/**.exec'
-            jacoco( 
-			      execPattern: 'target/**.exec',
-			      classPattern: 'target/classes',
-			      sourcePattern: 'src/main/java',
-			      exclusionPattern: 'src/test*'
-			)
-		}
-		catch(e){
-		    throw e
-		}
-		finally{
-		    junit 'target/surefire-reports/*.xml'
-		}
-    }
-    stage('Sonar') {
-        echo 'Sonar ...'
-        withSonarQubeEnv('Development') {
-		    executeMavenGoal('sonar:sonar', 'pom.xml', '-Xmx1024m') 
-	        }
-
-    }
+    
     stage ('Install') {
         echo 'Build ...'
-         executeMavenGoal('install -Dmaven.test.skip=true', 
-				 'pom.xml', '-Xmx1024m')
+        executeMavenGoal('install -Dmaven.test.skip=true','pom.xml', '-Xmx1024m')
 		
     }
 }
@@ -76,7 +47,6 @@ def executeMavenGoal (pMavenToolName, pJdkToolName, pMavenSettingsId, pMavenRepo
          } catch (Exception err) {
             echo 'Maven clean install failed'
             currentBuild.result = 'FAILURE'
-            slackNotifier(currentBuild.currentResult)
             throw err
          }
          //slackNotifier(currentBuild.currentResult)
@@ -86,8 +56,8 @@ def executeMavenGoal (pMavenToolName, pJdkToolName, pMavenSettingsId, pMavenRepo
 
 /* Ejecuta comandos de maven */
 def executeMavenGoal(pGoalsAndOptions, pPomFilePath, pMavenOpts){
-    def mavenToolDefault = 'Maven_Local'
-    def javaToolDefault = 'IBM SDK 8.0'
+    def mavenToolDefault = 'Maven3'
+    def javaToolDefault = 'JDK8'
     def mavenSettingsDefault = 'org.jenkinsci.plugins.configfiles.maven.MavenSettingsConfig1411853262833'
     def mavenRepositoryDefault = '.m2'
     executeMavenGoal (mavenToolDefault, javaToolDefault, mavenSettingsDefault, mavenRepositoryDefault, pGoalsAndOptions, pPomFilePath, pMavenOpts)
