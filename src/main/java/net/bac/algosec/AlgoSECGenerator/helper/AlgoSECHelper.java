@@ -20,17 +20,17 @@ public final class AlgoSECHelper {
 	 * @param action
 	 * @return
 	 */
-	public static Set<String> generateAlgoSECRequest (List<String> sources, List<String> destinations, List<String> ports, String action) {
-		Set<String> result = new TreeSet<String>();
-		
-		for (String destination : destinations) {
+	public static Set<String> generateAlgoSECRequest (final List<String> sources, final List<String> destinations,
+			final List<String> ports, final String action) {
+		final Set<String> result = new TreeSet<String>();
+
+		for (final String destination : destinations) {
 			result.addAll(generateSources(ports, sources, destination, action));
 		}
-		
-		
+
 		return result;
 	}
-	
+
 	/**
 	 * 
 	 * @param ports
@@ -39,16 +39,17 @@ public final class AlgoSECHelper {
 	 * @param action
 	 * @return
 	 */
-	private static Set<String> generatePorts (List<String> ports, String source, String destination, String action) {
-		TreeSet<String> result = new TreeSet<String>();
-		
-		for (String port : ports) {
-			result.add(generateAlgoSECLine(source, destination, port, action, DELIM)); 
+	private static Set<String> generatePorts(final List<String> ports, final String source, final String destination,
+			final String action) {
+		final TreeSet<String> result = new TreeSet<String>();
+
+		for (final String port : ports) {
+			result.add(generateAlgoSECLine(source, destination, port, action, DELIM));
 		}
-		
+
 		return result;
 	}
-	
+
 	/**
 	 * 
 	 * @param ports
@@ -57,19 +58,20 @@ public final class AlgoSECHelper {
 	 * @param action
 	 * @return
 	 */
-	private static Set<String> generateSources (List<String> ports, List<String> sources, String destination, String action) {
-		TreeSet<String> result = new TreeSet<String>();
-		
-		for (String source : sources) {
-			 result.addAll(generatePorts(ports, source, destination, action));
+	private static Set<String> generateSources(final List<String> ports, final List<String> sources,
+			final String destination, final String action) {
+		final TreeSet<String> result = new TreeSet<String>();
+
+		for (final String source : sources) {
+			result.addAll(generatePorts(ports, source, destination, action));
 		}
-		
+
 		return result;
 	}
-	
-	
-	/** 
+
+	/**
 	 * Prueba de documentación
+	 * 
 	 * @param source
 	 * @param destination
 	 * @param port
@@ -77,8 +79,9 @@ public final class AlgoSECHelper {
 	 * @param delim
 	 * @return String
 	 */
-	private static String generateAlgoSECLine (String source, String destination, String port, String action, String delim) {
-		StringBuilder stb = new StringBuilder(source);
+	private static String generateAlgoSECLine(final String source, final String destination, final String port,
+			final String action, final String delim) {
+		final StringBuilder stb = new StringBuilder(source);
 		stb.append(delim);
 		stb.append(destination);
 		stb.append(delim);
