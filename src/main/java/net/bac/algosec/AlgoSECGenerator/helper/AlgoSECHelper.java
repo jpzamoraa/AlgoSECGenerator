@@ -67,14 +67,15 @@ public final class AlgoSECHelper {
 		return result;
 	}
 	
-	/**
-	 * 
+	
+	/** 
+	 * Prueba de documentación
 	 * @param source
 	 * @param destination
 	 * @param port
 	 * @param action
 	 * @param delim
-	 * @return
+	 * @return String
 	 */
 	private static String generateAlgoSECLine (String source, String destination, String port, String action, String delim) {
 		StringBuilder stb = new StringBuilder(source);
