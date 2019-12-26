@@ -66,3 +66,7 @@ target/site/jacoco/net.bac.algosec.AlgoSECGenerator.ui/index.html
 target/site/jacoco/net.bac.algosec.AlgoSECGenerator.ui/index.source.html
 target/classes/net/bac/algosec/AlgoSECGenerator/ui/AlgoSECGenerator.class
 target/classes/net/bac/algosec/AlgoSECGenerator/ui/AlgoSECGenerator.class
+target/classes/META-INF/MANIFEST.MF
+target/classes/META-INF/maven/net.bac.algosec/AlgoSECGenerator/pom.properties
+target/classes/META-INF/maven/net.bac.algosec/AlgoSECGenerator/pom.xml
+target/classes/net/bac/algosec/AlgoSECGenerator/helper/AlgoSECHelper.class
